@@ -1,4 +1,3 @@
-cat index.html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +6,17 @@ cat index.html
     <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="description"
+      content="Our site is currently under maintenance. We'll be back online shortly."
+    />
+    <!-- Open Graph tags for better social sharing -->
+    <meta property="og:title" content="Site Maintenance" />
+    <meta
+      property="og:description"
+      content="Our site is currently under maintenance. We'll be back online shortly."
+    />
+    <meta property="og:type" content="website" />
     <link rel="icon" href="./logo-dark.png" type="image/png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -18,7 +28,8 @@ cat index.html
     />
     <style>
       body {
-        font-family: "Roboto", sans-serif;
+        font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Helvetica, Arial, sans-serif;
         color: #333;
         background-color: #f8f9fa;
         margin: 0;
@@ -59,6 +70,7 @@ cat index.html
         display: flex;
         justify-content: center;
         margin-top: 20px;
+        flex-wrap: wrap;
       }
       .countdown div {
         margin: 0 10px;
@@ -137,6 +149,17 @@ cat index.html
           color: #d1eaff;
         }
       }
+      @media (max-width: 480px) {
+        .countdown div {
+          margin: 0 5px;
+        }
+        .countdown div span {
+          font-size: 24px;
+        }
+        .countdown div label {
+          font-size: 14px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -145,12 +168,17 @@ cat index.html
       <div>
         <p>
           We're just sprucing things up a bit! In the meantime, feel free to
-          <a href="mailto:#">contact us</a> for a chat or to get any assistance
-          you need. We'll be up and running in just a moment, and the page will
-          automatically refresh at the end of the countdown below.
+          <a href="mailto:contact@example.com">contact us</a> for a chat or to
+          get any assistance you need. We'll be up and running in just a moment,
+          and the page will automatically refresh at the end of the countdown
+          below.
         </p>
       </div>
       <div class="countdown">
+        <div>
+          <span class="day"></span>
+          <label>Day</label>
+        </div>
         <div>
           <span class="hour"></span>
           <label>Hour</label>
@@ -165,24 +193,40 @@ cat index.html
         </div>
       </div>
       <div class="social-icons">
-        <a href="https://www.facebook.com" target="_blank"
-          ><i class="fab fa-facebook"></i
-        ></a>
-        <a href="https://www.linkedin.com" target="_blank"
-          ><i class="fab fa-linkedin"></i
-        ></a>
-        <a href="https://www.whatsapp.com" target="_blank"
-          ><i class="fab fa-whatsapp"></i
-        ></a>
+        <a
+          href="https://www.facebook.com"
+          target="_blank"
+          aria-label="Visit our Facebook page"
+        >
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com"
+          target="_blank"
+          aria-label="Visit our LinkedIn page"
+        >
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a
+          href="https://www.whatsapp.com"
+          target="_blank"
+          aria-label="Contact us on WhatsApp"
+        >
+          <i class="fab fa-whatsapp"></i>
+        </a>
       </div>
       <footer>
-        <p>Copyright ©2025 All rights reserved.</p>
+        <p>Copyright 2025 All rights reserved.</p>
       </footer>
     </div>
 
     <script>
-      const stringDate = new Date(Date.now() + 7200 * 1000).toLocaleString();
+      // Set the countdown to 7 days from now
+      const stringDate = new Date(
+        Date.now() + 7 * 24 * 60 * 60 * 1000
+      ).toLocaleString();
       const countDay = new Date(stringDate); // format: MM/DD/YYYY HH:MM:SS
+
       const countDown = () => {
         const now = new Date();
         const counter = countDay - now;
@@ -196,9 +240,10 @@ cat index.html
         const textSecond = Math.floor((counter % minute) / second);
 
         if (textSecond < 0) {
-          window.location.href = "https://www.warps.dev";
+          // Refresh the page instead of redirecting
+          window.location.reload();
         } else {
-          // document.querySelector(".day").innerText = textDay;
+          document.querySelector(".day").innerText = textDay;
           document.querySelector(".hour").innerText = textHour;
           document.querySelector(".minute").innerText = textMinute;
           document.querySelector(".second").innerText = textSecond;
