@@ -75,7 +75,3 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests to improve this maintenance page.
-
----
-
-Created by [to4kin](https://github.com/to4kin)
